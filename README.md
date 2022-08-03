@@ -15,6 +15,8 @@ If you're having issues, want to share your custom modes, or learn from the comm
  To begin installation, you must install NodeJS first. You can find the NodeJS download [here.](https://nodejs.org/en/)
 
   After installation is done, click `finish`.
+  
+  
   ![image](https://user-images.githubusercontent.com/69131802/182696287-ae753806-0946-4742-9f73-2cb4d1ee78f2.png)
 
 
