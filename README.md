@@ -26,10 +26,15 @@ If you're having issues, want to share your custom modes, or learn from the comm
   
   
   ![image](https://user-images.githubusercontent.com/69131802/182697226-0a60be60-8a6d-433b-bc91-2627266f6058.png)
+  ### Windows
+  
+  
 
 Unzip the ZIP folder you downloaded, move it to your downloads and then rename it to "ffmpeg".
 
-  Right click the unzipped folder, select "Cut", direct to This PC, enter your C: drive and paste the ffmpeg folder in there.
+  Copy the unzipped folder, if you're on Windows, direct to This PC, enter your C: drive and paste the ffmpeg folder in there.
+  
+  For MacOS users, refer to [this](https://bbc.github.io/bbcat-orchestration-docs/installation-mac-manual/) tutorial for FFmpeg installation.
 
   After moving the ffmpeg folder into your C: drive, open Command Prompt with administrator and run this: setx /m PATH "C:\ffmpeg\bin;%PATH%" (If, for some reason, you are unable to run Command Prompt with administrator permissions, you can hit the windows key, then type "edit environment variables for your account" and hit enter, then you need to click "Path", then click "Edit," then you click "New" and paste in "C:\ffmpeg\bin" and then make sure to click "Ok" in both windows).
 
