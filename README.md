@@ -23,7 +23,11 @@ If you're having issues, want to share your custom modes, or learn from the comm
 ### FFmpeg
 
   After installing NodeJS, you need to download FFmpeg next. To install FFmpeg you need to go to [this](https://ffmpeg.org) link and select the green Download button.
-Unzip the folder, move it to your downloads and then rename it to "ffmpeg".
+  
+  
+  ![image](https://user-images.githubusercontent.com/69131802/182697226-0a60be60-8a6d-433b-bc91-2627266f6058.png)
+
+Unzip the ZIP folder you downloaded, move it to your downloads and then rename it to "ffmpeg".
 
   Right click the unzipped folder, select "Cut", direct to This PC, enter your C: drive and paste the ffmpeg folder in there.
 
