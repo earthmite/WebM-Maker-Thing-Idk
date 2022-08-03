@@ -6,15 +6,16 @@ If you're having issues, want to share your custom modes, or learn from the comm
 
 ## Dependencies
 
- * [NodeJS](https://nodejs.org)
- * [FFmpeg](https://ffmpeg.org)
+ * [NodeJS](https://nodejs.org/en/download/)
+ * [FFmpeg](https://ffmpeg.org/download.html)
  * FFprobe
 
 ### NodeJS
  
  To begin installation, you must install NodeJS first. You can find the NodeJS download [here.](https://nodejs.org/en/)
 
-  After that, if prompted to restart, it is recommended to do so.
+  After installation is done, click `finish`.
+  [Imgur](https://i.imgur.com/zwGwlfY.jpg)
 
 ### FFmpeg
 
