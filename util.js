@@ -1,13 +1,15 @@
 // please only put things here that will be used by *multiple* modes, so as not to clutter the file too much.
 
 const util = require('util')
+const path = require('path')
 // These could be arguments, as well. They could also be taken via user input with readline.
 const delta = 1
 
 // In case audio level readouts throw an "-inf"
 // this will make it Javascript's negative infinity.
 // dont export this (yet), we dont need it anywhere except getAudioLevelMap currently
-const resolveNumber = (n) => (isNaN(Number(n)) ? Number.NEGATIVE_INFINITY : Number(n))
+//const resolveNumber = (n) => (isNaN(Number(n)) ? Number.NEGATIVE_INFINITY : Number(n))
+const resolveNumber = (n, d = Number.NEGATIVE_INFINITY) => isFinite(n) ? Number(n) : d
 
 const execSync = util.promisify(require('child_process').exec)
 // Obtains a map of the audio levels in decibels from the input file.
@@ -22,8 +24,22 @@ async function getAudioLevelMap(videoPath) {
 	const highest = intermediateMap.reduce((previous, current) => (previous.dBs > current.dBs ? previous : current))
 	//return intermediateMap.map(v => ({ percentMax: 1 - (highest.dBs / v.dBs), ...v })) // Shrink when louder.
 	// Amend percentages of the audio per frame vs. the highest in the file.
-	return intermediateMap.map((v) => ({ percentMax: highest.dBs / v.dBs, ...v }))
+	//return intermediateMap.map((v) => ({ percentMax: highest.dBs / v.dBs, ...v }))
+
+	// Obtain the average audio level of the file.
+	const average = intermediateMap.reduce((previous, current) => previous + resolveNumber(current.dBs, 0), 0) / intermediateMap.length
+	// Calculate the deviation.
+	const deviation = Math.abs((highest.dBs - average) / 2)
+	// Calculate and amend percentage of decimals from across the video.
+	for (const frame of intermediateMap) {
+		const clamped = Math.max(Math.min(frame.dBs, average + deviation), average - deviation)
+		const v = Math.abs((clamped - average) / deviation) * 0.5
+		frame.percentMax = clamped > average ? (0.5 + v) : (0.5 - v)
+	}
+	return intermediateMap
 }
+
+const getFileName = (p) => path.basename(p, path.extname(p))
 
 const WARN = `\n[WARNING] %s\n`
 const ERROR = `\n[ERROR] %s\n`
@@ -32,4 +48,4 @@ const orgConsoleError = console.error
 console.warn = (m) => orgConsoleWarn(WARN, m)
 console.error = (m) => orgConsoleError(ERROR, m)
 
-module.exports = { delta, getAudioLevelMap }
+module.exports = { delta, getAudioLevelMap, getFileName }
